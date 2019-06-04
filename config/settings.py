@@ -43,11 +43,14 @@ INSTALLED_APPS = [
     'storages',
     'shop',
     'allauth',
-    'cart',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.naver',
+    'cart',
+    'coupon',
 ]
+
+CART_ID = 'cart_in_session'
 
 
 MIDDLEWARE = [
@@ -95,8 +98,8 @@ DATABASES = {
     }
 }
 
-AWS_ACCESS_KEY_ID = 'AKIAXPMFNCCHDJ7VE6EP'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 AWS_REGION = 'ap-northeast-2'
 AWS_STORAGE_BUCKET_NAME = 'django-secondhand'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
