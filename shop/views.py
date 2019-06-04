@@ -25,3 +25,4 @@ def product_detail(request, id, product_slug=None):
     return render(request, 'shop/detail.html', {'product': product})
 
 
+

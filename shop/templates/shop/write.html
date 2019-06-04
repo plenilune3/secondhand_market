@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Write Page{% endblock %}
+{% block content %}
+    <div class="row">
+      <div class="col-lg-8 mb-4">
+        <h3>상품설명</h3>
+        <form method="post" name="sentMessage" id="contactForm" action="/write">
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>상품이름:<%= title%></label>
+              <input type="text" class="form-control" id="name" required data-validation-required-message="상품이름을 입력해주세요.">
+              <p class="help-block"></p>
+            </div>
+          </div>
+          <div class="control-group form-group">
+              <div class="controls">
+                <label>사진:</label>
+                    <input type="file" name="profile">
+                <p class="help-block"></p>
+              </div>
+            </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>가격:</label>
+              <input type="text" class="form-control" id="phone" required data-validation-required-message="가격을 입력해주세요.">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>상태:</label>
+              <input type="text" class="form-control" id="status" required data-validation-required-message="상태를 입력해주세요.">
+            </div>
+          </div>
+          <div class="control-group form-group">
+            <div class="controls">
+              <label>설명:</label>
+              <textarea rows="10" cols="100" name="message" class="form-control" id="message" required data-validation-required-message="설명을 입력해주세요" maxlength="999" style="resize:none"></textarea>
+            </div>
+          </div>
+          <div id="success"></div>
+          <!-- For success/fail messages -->
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">완료</button>
+        </form>
+      </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}
