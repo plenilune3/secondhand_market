@@ -23,10 +23,12 @@
 
                 <div class="col-lg-4 md-10 md-4">
                     <div class="card-100">
-                      <img class="card-img-top" src="{{product.image.url}}" alt="Product Image">
+                      <img class="card-img-top" width ="200px" height ="300px" src="{{product.image.url}}" alt="Product Image">
                       <div class="card-body">
                         <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.description}} <span class="badge badge-secondary">${{product.price}}</span></p>
+                        <!-- <p class="card-text">{{product.description}} <span class="badge badge-primary">${{product.price}}</span></p> -->
+                        <p class="card-text">{{product.description}}</p>
+                        <p><span class="badge badge-primary">${{product.price}}</span></p>
                         <a href="{{product.get_absolute_url}}" class="btn btn-primary">View Detail</a>
                       </div>
                     </div>
