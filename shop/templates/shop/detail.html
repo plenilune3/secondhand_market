@@ -18,7 +18,9 @@
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary btn-sm" value="Add to Cart">
                     </form>
-                    <h5><span class="badge badge-secondary">Description</span>{{product.description|linebreaks}}</h5>
+                    <br>
+                    <!-- <h5><span class="badge badge-secondary">Description</span>{{product.description|linebreaks}}</h5> -->
+                    <h5><span class="badge badge-light">Description</span><hr size="5px" width="100px" align="left" color="black">{{product.description|linebreaks}}</h5>
                 </div>
             </div>
 

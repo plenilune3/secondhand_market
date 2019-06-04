@@ -2,7 +2,6 @@
 {% block title %}Category Page{% endblock %}
 {% block content %}
 
-
     <div class="row">
         <div class="col-lg-3">
             <div class="list-group">
@@ -28,7 +27,8 @@
                         <h5 class="card-title">{{product.name}}</h5>
                         <!-- <p class="card-text">{{product.description}} <span class="badge badge-primary">${{product.price}}</span></p> -->
                         <p class="card-text">{{product.description}}</p>
-                        <p><span class="badge badge-primary">${{product.price}}</span></p>
+                        <p><span class="badge badge-secondary">Price</span>&nbsp;₩&nbsp;{{product.price}}</p>
+                        <!-- <p><span class="badge badge-primary">${{product.price}}</span></p> -->
                         <a href="{{product.get_absolute_url}}" class="btn btn-primary">View Detail</a>
                       </div>
                     </div>
