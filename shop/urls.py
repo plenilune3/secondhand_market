@@ -4,7 +4,8 @@ from shop.views import *
 
 app_name = 'shop'
 
-urlpatterns = [
+urlpatterns = [    
+    path('write/', product_write),
     path('', product_in_category, name='product_all'),
     path('<slug:category_slug>/', product_in_category, name='product_in_category'),
     path('<int:id>/<product_slug>', product_detail, name='product_detail'),

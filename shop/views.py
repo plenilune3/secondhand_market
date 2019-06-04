@@ -25,5 +25,7 @@ def product_detail(request, id, product_slug=None):
 
     return render(request, 'shop/detail.html', {'product': product, 'add_to_cart': add_to_cart})
 
+def product_write(request):
+    return render(request, 'shop/write.html')
 
 

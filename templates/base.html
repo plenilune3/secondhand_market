@@ -40,6 +40,9 @@
             <a class="nav-link btn" href="{% url 'account_login' %}">Login</a>
             {% endif %}
         </li>
+        <li>
+          <a class="nav-link btn" href="write">write</a>
+        </li>
         <li class="nav-item ">
         <a class="nav-link btn btn-outline-success" href="{% url 'cart:detail' %}">Cart
             {% if cart|length > 0 %}
