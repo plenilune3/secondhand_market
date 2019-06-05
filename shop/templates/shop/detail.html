@@ -12,8 +12,8 @@
                     <h1 class="display-6">{{product.name}}</h1>
 
                     <p><span class="badge badge-secondary">Price</span> {{product.price}}</p>
-                    <form action="" method="post">
-{#                    <form action="{% url 'cart:product_add' product.id %}" method="post">#}
+{#                    <form action="" method="post">#}
+                    <form action="{% url 'cart:product_add' product.id %}" method="post">
                         {{add_to_cart}}
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary btn-sm" value="Add to Cart">
@@ -22,6 +22,7 @@
                     <!-- <h5><span class="badge badge-secondary">Description</span>{{product.description|linebreaks}}</h5> -->
                     <h5><span class="badge badge-light">Description</span><hr size="5px" width="100px" align="left" color="black">{{product.description|linebreaks}}</h5>
                 </div>
+
             </div>
 
         </div>

@@ -2,6 +2,7 @@
 {% block title %}Write Page{% endblock %}
 {% block content %}
 
+            {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data" action="/write_sub">
     {% csrf_token %}
         <input type="text" name="name"><br>
@@ -12,7 +13,9 @@
         <input type="text" name="stock" id=""><br>
         <input type="submit">
     </form>
-
+    {% else %}
+    <h1>로그인이 필요합니다!!</h1>
+    {% endif %}
 
 
 
