@@ -31,7 +31,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/%y/%m/%d', blank=True)
     description = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
-
+    user_id = models.CharField(max_length=200, default='')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
 

@@ -11,6 +11,7 @@
         <input type="text" name="description"><br>
         <input type="text" name="meta_description" id=""><br>
         <input type="text" name="stock" id=""><br>
+        <input type="hidden" name="user_id" value="{{ user.username }}">
         <input type="submit">
     </form>
     {% else %}

@@ -30,10 +30,11 @@ def product_detail(request, id, product_slug=None):
     cart = Cart(request)
     product = get_object_or_404(Product, id=id, slug=product_slug)
     add_to_cart = AddProductForm(initial={'quantity': 1})
-
+    id = Product.objects.get(id=id)
     return render(request, 'shop/detail.html', {'cart':cart,
                                                 'product': product,
                                                 'id' : id,
+                                                'user_id':id.user_id,
                                                 'add_to_cart': add_to_cart})
 def product_write(request):
     return render(request, 'shop/write.html')
@@ -46,6 +47,7 @@ def write_sub(request):
             slug=str(request.POST["name"]).replace(' ','-'),
             image=request.FILES.get("image"),
             description=request.POST["description"],
+            user_id=request.POST["user_id"],
             meta_description=request.POST["meta_description"],
             price=request.POST["price"],
             stock=request.POST["stock"]
