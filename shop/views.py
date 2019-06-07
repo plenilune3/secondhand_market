@@ -23,6 +23,10 @@ def product_in_category(request, category_slug=None):
 
 
 def product_detail(request, id, product_slug=None):
+    del_product = Product.objects.get(id=id)
+    if request.method == 'POST' and request.POST["is_del"]=="del":
+        del_product.delete()
+        return HttpResponseRedirect('/')
     cart = Cart(request)
     product = get_object_or_404(Product, id=id, slug=product_slug)
     add_to_cart = AddProductForm(initial={'quantity': 1})
@@ -31,15 +35,15 @@ def product_detail(request, id, product_slug=None):
                                                 'product': product,
                                                 'id' : id,
                                                 'add_to_cart': add_to_cart})
-
 def product_write(request):
     return render(request, 'shop/write.html')
 def write_sub(request):
     if request.method == "POST":
+        print(str(request.POST["name"]).replace(' ','-'))
         new_product = Product.objects.create(
             category=Category.objects.all()[1],
             name=request.POST["name"],
-            slug=request.POST["name"],
+            slug=str(request.POST["name"]).replace(' ','-'),
             image=request.FILES.get("image"),
             description=request.POST["description"],
             meta_description=request.POST["meta_description"],

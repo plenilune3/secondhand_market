@@ -26,7 +26,7 @@
      style="
      background-color: rgba(167, 190, 216, 0.5)!important;
      margin-bottom: 1rem;">
-  <a class="navbar-brand" href="/">Django Shop</a>
+  <a class="navbar-brand" href="/" style="height: 100px;"><img src="https://django-secondhand.s3.ap-northeast-2.amazonaws.com/static/main.png" style="height: 100px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -40,9 +40,12 @@
             <a class="nav-link btn" href="{% url 'account_login' %}">Login</a>
             {% endif %}
         </li>
+
+        {% if user.is_authenticated %}
         <li>
           <a class="nav-link btn" href="/write">write</a>
         </li>
+        {% endif %}
         <li class="nav-item ">
         <a class="nav-link btn btn-outline-success" href="{% url 'cart:detail' %}">Cart
             {% if cart|length > 0 %}
