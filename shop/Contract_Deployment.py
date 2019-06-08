@@ -16,6 +16,7 @@ class ContractDeployment:
         self.password = password
         self.value = value
         self.unlock = False
+        self.secondhand = None
         self.contractAbi = [{'constant': True,
                              'inputs': [],
                              'name': 'seller',
@@ -69,7 +70,7 @@ class ContractDeployment:
         tx_hash = SecondHand.constructor(self.seller).transact()
         tx_receipt = self.w3.eth.waitForTransactionReceipt(tx_hash)
 
-        secondhand = self.w3.eth.contract(
+        self.secondhand = self.w3.eth.contract(
             address=tx_receipt.contractAddress,
             abi=self.contractAbi,
         )
@@ -77,22 +78,23 @@ class ContractDeployment:
         print("Contract Address : {}".format(tx_receipt.contractAddress))
 
         print("Balance : {}".format(
-            secondhand.functions.getBalance().call()
+            self.secondhand.functions.getBalance().call()
             ))
 
         tx_hash2 = self.w3.eth.sendTransaction({'from': self.buyer, 'to': tx_receipt.contractAddress,
                                                 'value': self.w3.toWei(self.value, "ether")})
         tx_receipt2 = self.w3.eth.waitForTransactionReceipt(tx_hash2)
 
+    def buy(self):
         print("Before Buying contract's Balance : {}".format(
-            secondhand.functions.getBalance().call()
+            self.secondhand.functions.getBalance().call()
             ))
 
         print("Before Buying Seller's Balance : {}".format(
             self.w3.eth.getBalance(self.seller)
         ))
 
-        tx_hash3 = secondhand.functions.buy().transact()
+        tx_hash3 = self.secondhand.functions.buy().transact()
         tx_receipt3 = self.w3.eth.waitForTransactionReceipt(tx_hash3)
 
         print("After Buying Seller's Balance : {}".format(
