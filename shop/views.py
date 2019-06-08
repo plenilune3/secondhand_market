@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django import forms
 
 # Create your views here.
 from cart.cart import Cart
 from cart.forms import AddProductForm
 from .models import *
+
+
 
 
 def product_in_category(request, category_slug=None):
@@ -38,9 +41,25 @@ def product_detail(request, id, product_slug=None):
                                                 'add_to_cart': add_to_cart})
 def product_write(request):
     return render(request, 'shop/write.html')
+
+def product_update(request,id):
+    # update_product= get_object_or_404(Product, id=id)
+    update_product = Product.objects.get(id=id)
+    if request.method == "POST":
+        # update_product.category=Category.objects.all()[]
+        update_product.name = request.POST['name']
+        update_product.slug = request.POST['name']
+        update_product.image = request.FILES.get('image')
+        update_product.description = request.POST['description']
+        update_product.price = request.POST['price']
+        update_product.stock = request.POST['stock']
+        update_product.save()
+        return HttpResponseRedirect('/')
+    return render(request, 'shop/update.html' ,{ 'update_product': update_product })
+        
 def write_sub(request):
     if request.method == "POST":
-        print(str(request.POST["name"]).replace(' ','-'))
+        # print(str(request.POST["name"]).replace(' ','-'))
         new_product = Product.objects.create(
             category=Category.objects.all()[1],
             name=request.POST["name"],

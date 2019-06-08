@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Write Page{% endblock %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <form method="POST" enctype="multipart/form-data" action="update">
+    {% csrf_token %}
+        <input type="text" name="name" value="{{ update_product.name }}" ><br>
+        <input type="text" name="price" value="{{ update_product.price }}"><br>
+        <input type="file" name="image" value="{{ update_product.image }}"><br>
+        <input type="text" name="description" value="{{ update_product.description }}"><br>
+        <input type="text" name="meta_description" id="" value="{{ update_product.meta_description }}"><br>
+        <input type="text" name="stock" id="" value="{{ update_product.stock }}"><br>
+        <input type="hidden" name="user_id" value="{{ user.username }}">
+        <button type="submit" name="is_up" > 확인 </button>
+    </form>
+    {% else %}
+    <h1>로그인이 필요합니다!!</h1>
+    {% endif %}
+
+
+
+{% endblock %}

@@ -27,10 +27,9 @@
                     {% csrf_token %}
                     <button value="del" name="is_del"> 게시글 삭제</button>
                 </form>
-                <form action="{{ product.get_absolute_url}}" method="post">
-                    {% csrf_token %}
-                    <button value="update" name="is_update"> 게시글 수정 </button>
-                </form>
+                <a href="update" type="button">안녕</a>
+                {% elif user.is_authenticated %}
+                <a href="" type="button">구매하기</a>
                 {% endif %}
 
             </div>

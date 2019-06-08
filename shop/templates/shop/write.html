@@ -2,17 +2,17 @@
 {% block title %}Write Page{% endblock %}
 {% block content %}
 
-            {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data" action="/write_sub">
     {% csrf_token %}
-        <input type="text" name="name"><br>
+        <input type="text" name="name" ><br>
         <input type="text" name="price"><br>
         <input type="file" name="image"><br>
         <input type="text" name="description"><br>
         <input type="text" name="meta_description" id=""><br>
         <input type="text" name="stock" id=""><br>
         <input type="hidden" name="user_id" value="{{ user.username }}">
-        <input type="submit">
+        <button type="submit" name="is_up" value="write"> 확인 </button>
     </form>
     {% else %}
     <h1>로그인이 필요합니다!!</h1>

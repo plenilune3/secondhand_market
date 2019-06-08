@@ -5,6 +5,7 @@ from shop.views import *
 app_name = 'shop'
 
 urlpatterns = [
+    path('<id>/update', product_update),
     path('write_sub', write_sub),
     path('write/', product_write),
     path('', product_in_category, name='product_all'),
