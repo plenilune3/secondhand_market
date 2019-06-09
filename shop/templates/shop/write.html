@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Write Page{% endblock %}
 {% block content %}
-
     {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data" action="/write_sub">
     {% csrf_token %}
@@ -35,7 +34,10 @@
         <input type="hidden" name="user_id" value="{{ user.username }}">
         <button type="submit" name="is_up" value="write"> 확인 </button>
     </div>
+
     </form>
+
+
     {% else %}
     <h1>로그인이 필요합니다!!</h1>
     {% endif %}

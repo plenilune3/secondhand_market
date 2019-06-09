@@ -30,8 +30,9 @@
                 <td>
                     <form action="{% url "cart:product_add" product.id %}" method="post">
                         {{ item.quantity_form.quantity }}
+                        <br>
                         {{ item.quantity_form.is_update }}
-                        <input type="submit" class="btn btn-primary" value="Update">
+                        <input type="submit" class="btn btn-primary" value="Update" style="margin-top: 10px; margin-left:0px;">
                         {% csrf_token %}
                     </form>
                 </td>
