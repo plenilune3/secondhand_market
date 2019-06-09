@@ -10,7 +10,7 @@ from web3.contract import ConciseContract
 class ContractDeployment:
     def __init__(self, buyer, seller, password, value):
         #아이피 주소 바꾸세용 제껄로~~~
-        self.w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
+        self.w3 = Web3(Web3.HTTPProvider('http://172.19.7.43:8545'))
         self.buyer = buyer
         self.seller = seller
         self.password = password

@@ -5,6 +5,10 @@ from shop.views import *
 app_name = 'shop'
 
 urlpatterns = [
+
+    path('buy_contract', buy_contract),
+    path('deploy_contract', deploy_contract),
+    path('make_wallet',make_wallet),
     path('<id>/update', product_update),
     path('write_sub', write_sub),
     path('write/', product_write),

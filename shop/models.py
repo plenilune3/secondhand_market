@@ -34,6 +34,8 @@ class Product(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True, allow_unicode=True)
     image = models.ImageField(upload_to='products/%y/%m/%d', blank=True)
+    contract_adress = models.CharField(max_length=200, default="")
+    buyer = models.CharField(max_length=200, default="")
     description = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     user_id = models.CharField(max_length=200, default='')

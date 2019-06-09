@@ -11,17 +11,23 @@
                     <h1 class="display-6" style="width:fit-content;">{{product.name}}</h1>
                     {% if product.product_state == 0 %}
                     <div class="badge badge-primary" style="height:20px; margin: auto 0px;">판매중</div>
-                    <form action="deploy_contract">
-                        <input type="hidden" name="buyer" value="{{ user.username }}">
-                        <input type="hidden" name="seller" value="{{ product.user_id }}">
+                    <form method="post" action="/deploy_contract">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ product.id }}">
+                        <input type="hidden" name="sell" value="{{ product.user_id }}">
+                        <input type="text" name="pw" style=" height: 20px;" placeholder="지갑비밀번호">
+                        <button class="badge badge-info" style="height:20px; margin: auto 0px;">구매하기</button>
                     </form>
                     <!-- <button onclick="location.href=''" type="button" class="btn btn-">구매하기</a> -->
                 {% elif product.product_state == 1%}    
                     <div class="badge badge-warning" style="height:20px; margin: auto 0px;">거래중</div>
-                    {% if product.buyer == user.username %}
-                    <a href="buy_contract" type="button" class="badge badge-info"
-                     style="height:20px; margin: auto 0px;">거래확정</a>
-                    {% endif %}
+                    <form method="post" action="/buy_contract">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ product.id }}">
+                        <input type="hidden" name="sell" value="{{ product.user_id }}">
+                        <input type="text" name="pw" style=" height: 20px;" placeholder="지갑비밀번호">
+                        <button class="badge badge-info" style="height:20px; margin: auto 0px;">거래확정</button>
+                    </form>
                 {% elif product.product_state == 2 %}
                     <div class="badge badge-success" style="height:20px; margin: auto 0px;">거래완료</div>
                 {% endif %}
@@ -59,24 +65,24 @@
                 </div>
             </div> -->
 
-        </div>
-        <div class="row" style="position:relative;">
-                {% if user.username == product.user_id %}
-                
-                <div class="row" style="margin: auto;">
-                    <form action="{{product.get_absolute_url}}" method="post">
-                        {% csrf_token %}
-                        <button value="del" name="is_del" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 삭제</button>
-                        {% if product.product_state == 1%}
-                            <a href="" type="button"> 거래취소 </a>
-                        {% endif %}
-                    </form>
-                    <button onclick="location.href='update'" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 수정 </a>
-                    </div>    
-                </div>   
+            </div>
+            <div class="row" style="position:relative;">
+                    {% if user.username == product.user_id %}
+                    
+                    <div class="row" style="margin: auto;">
+                        <form action="{{product.get_absolute_url}}" method="post">
+                            {% csrf_token %}
+                            <button value="del" name="is_del" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 삭제</button>
+                            {% if product.product_state == 1%}
+                                <a href="" type="button"> 거래취소 </a>
+                            {% endif %}
+                        </form>
+                        <button onclick="location.href='update'" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 수정 </button>
+                        </div>    
+            </div>   
 
                 {% endif %}
-                </div>
+        </div>
             </div>
 
 
