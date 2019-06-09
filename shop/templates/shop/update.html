@@ -5,14 +5,39 @@
     {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data" action="update">
     {% csrf_token %}
-        <input type="text" name="name" value="{{ update_product.name }}" ><br>
+    <div style="width: 20%; height: 200px; float: left; text-align: center" >
+            <ul>
+                <li>제품명 : <br><br></li>
+                <li>제시가격 : <br><br></li>
+                <li>제품사진 : <br><br></li>
+                <li> 수량 : <br><br></li>
+                <li> 설명1  : <br><br></li>
+                <li> 설명2  : <br><br></li>
+                
+            </ul>
+        </div>
+        <div style="width: 70%; height: 150px; float: left;">
+            <ul style="width:100%;">
+                <li><input type="text" name="name" value="{{ update_product.name }}" style="width: 100%;"><br><br></li>
+                <li><input type="text" name="price" value="{{ update_product.price }}" style="width: 100%;"><br><br></li>
+                <li><input type="file" name="image" value="{{ update_product.image }}" style="width: 100%;"><br><br></li>
+                <li><input type="text" name="stock" value="{{ update_product.stock }}" id=""style="width: 100%;"><br><br></li>
+                <li><input type="text" name="description" value="{{ update_product.description }}" style="width: 100%;"><br><br></li>
+                <!-- <li><input type="text" name="meta_description" id=""><br><br></li> -->
+                <!-- <li><input type="hidden" name="user_id" value="{{ user.username }}"><br></li> -->
+            </ul>
+            <input type="text" name="meta_description" value="{{ update_product.meta_description }}" id="" style="width: 100%; height:200px"><br><br>
+            <input type="hidden" name="user_id" value="{{ user.username }}"><br>
+            <input type="submit" name="is_up" style="position:relative; margin-left: 50%;"><br>
+        </div>
+        <!-- <input type="text" name="name" value="{{ update_product.name }}" ><br>
         <input type="text" name="price" value="{{ update_product.price }}"><br>
         <input type="file" name="image" value="{{ update_product.image }}"><br>
         <input type="text" name="description" value="{{ update_product.description }}"><br>
         <input type="text" name="meta_description" id="" value="{{ update_product.meta_description }}"><br>
         <input type="text" name="stock" id="" value="{{ update_product.stock }}"><br>
         <input type="hidden" name="user_id" value="{{ user.username }}">
-        <button type="submit" name="is_up" > 확인 </button>
+        <button type="submit" name="is_up" > 확인 </button> -->
     </form>
     {% else %}
     <h1>로그인이 필요합니다!!</h1>

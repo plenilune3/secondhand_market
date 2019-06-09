@@ -19,30 +19,30 @@
         </div>
         <form method="POST" enctype="multipart/form-data" action="/write_sub">
         {% csrf_token %}
-            <div style="width: 120px; height: 200px; float: left; text-align: center" >
+            <div style="width: 20%; height: 200px; float: left; text-align: center" >
                 <ul>
                     <li>제품명 : <br><br></li>
-                    <li>제시 가격 : <br><br></li>
-                    <li>제품 사진 : <br><br></li>
+                    <li>제시가격 : <br><br></li>
+                    <li>제품사진 : <br><br></li>
                     <li> 수량 : <br><br></li>
                     <li> 설명1  : <br><br></li>
                     <li> 설명2  : <br><br></li>
                     
                 </ul>
             </div>
-            <div style="width: 200px; height: 150px; float: left;">
-                <ul style="width: 500px;">
-                    <li><input type="text" name="name" style="width: 500px;"><br><br></li>
-                    <li><input type="text" name="price"style="width: 500px;"><br><br></li>
-                    <li><input type="file" name="image"style="width: 500px;"><br><br></li>
-                    <li><input type="text" name="stock" id=""style="width: 500px;"><br><br></li>
-                    <li><input type="text" name="description"style="width: 500px;"><br><br></li>
+            <div style="width: 70%; height: 150px; float: left;">
+                <ul style="width:100%;">
+                    <li><input type="text" name="name" style="width: 100%;"><br><br></li>
+                    <li><input type="text" name="price"style="width: 100%;"><br><br></li>
+                    <li><input type="file" name="image"style="width: 100%;"><br><br></li>
+                    <li><input type="text" name="stock" id=""style="width: 100%;"><br><br></li>
+                    <li><input type="text" name="description"style="width: 100%;"><br><br></li>
                     <!-- <li><input type="text" name="meta_description" id=""><br><br></li> -->
                     <!-- <li><input type="hidden" name="user_id" value="{{ user.username }}"><br></li> -->
                 </ul>
-                <input type="text" name="meta_description" id="" style="width: 500px; height:200px"><br><br>
+                <input type="text" name="meta_description" id="" style="width: 100%; height:200px"><br><br>
                 <input type="hidden" name="user_id" value="{{ user.username }}"><br>
-                <input type="submit" style="margin:auto"><br>
+                <input type="submit" style="position:relative; margin-left: 50%;"><br>
             </div>
         </form>
     </div>
