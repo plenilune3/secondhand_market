@@ -17,6 +17,7 @@ class WalletManagement:
         return self.w3.toWei(balance, 'ether')
 
 
+
 #from Wallet_Management import WalletManagement
 #test = WalletManagement()
 #파라미터로 비밀키 전달하셈
