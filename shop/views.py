@@ -98,3 +98,10 @@ def write_sub(request):
         new_product.save()
 
         return HttpResponseRedirect('/')
+
+        
+#from Contract_Deployment import ContractDeployment
+#test = ContractDeployment("0xCfd8cbE5Da3002B52c650cE1302E10c6d1BE644E","0x5B44b4E4052672b19CADEfC892b09488aEbBDDa6","pass0",100)
+#test.unlockAccount()
+#test.deploy()
+#test.buy("컨트랙트 주소")
