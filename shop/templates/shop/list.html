@@ -15,9 +15,11 @@
 
 
         <div class="col">
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-light" role="alert" style="font-size: 1.5rem;">
               {% if current_category %}{{current_category.name}}{% else %}All Products{% endif %}
+              <hr style="border-color: gray; width: 100%;">
             </div>
+            
             <div class="row">
             {% for product in products %}
 
