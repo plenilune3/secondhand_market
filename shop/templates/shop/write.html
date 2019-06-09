@@ -2,22 +2,52 @@
 {% block title %}Write Page{% endblock %}
 {% block content %}
 
-    {% if user.is_authenticated %}
-    <form method="POST" enctype="multipart/form-data" action="/write_sub">
-    {% csrf_token %}
-        <input type="text" name="name" ><br>
-        <input type="text" name="price"><br>
-        <input type="file" name="image"><br>
-        <input type="text" name="description"><br>
-        <input type="text" name="meta_description" id=""><br>
-        <input type="text" name="stock" id=""><br>
-        <input type="hidden" name="user_id" value="{{ user.username }}">
-        <button type="submit" name="is_up" value="write"> 확인 </button>
-    </form>
+<div class="row">
+    <!-- <div class="col-lg-3">
+        <div class="list-group">
+            <a href="/" class="list-group-item {% if not current_category %}active{% endif %}">All</a>
+            {% for c in categories %}
+                <a href="{{c.get_absolute_url}}" class="list-group-item {% if current_category.slug == c.slug %}active{% endif %}">{{c.name}}</a>
+            {% endfor %}
+        </div>
+    </div> -->
+
+        {% if user.is_authenticated %}
+    <div class="col">
+        <div class="alert alert-info" role="alert">
+                Write
+        </div>
+        <form method="POST" enctype="multipart/form-data" action="/write_sub">
+        {% csrf_token %}
+            <div style="width: 120px; height: 200px; float: left; text-align: center" >
+                <ul>
+                    <li>제품명 : <br><br></li>
+                    <li>제시 가격 : <br><br></li>
+                    <li>제품 사진 : <br><br></li>
+                    <li> 수량 : <br><br></li>
+                    <li> 설명1  : <br><br></li>
+                    <li> 설명2  : <br><br></li>
+                    
+                </ul>
+            </div>
+            <div style="width: 200px; height: 150px; float: left;">
+                <ul style="width: 500px;">
+                    <li><input type="text" name="name" style="width: 500px;"><br><br></li>
+                    <li><input type="text" name="price"style="width: 500px;"><br><br></li>
+                    <li><input type="file" name="image"style="width: 500px;"><br><br></li>
+                    <li><input type="text" name="stock" id=""style="width: 500px;"><br><br></li>
+                    <li><input type="text" name="description"style="width: 500px;"><br><br></li>
+                    <!-- <li><input type="text" name="meta_description" id=""><br><br></li> -->
+                    <!-- <li><input type="hidden" name="user_id" value="{{ user.username }}"><br></li> -->
+                </ul>
+                <input type="text" name="meta_description" id="" style="width: 500px; height:200px"><br><br>
+                <input type="hidden" name="user_id" value="{{ user.username }}"><br>
+                <input type="submit" style="margin:auto"><br>
+            </div>
+        </form>
+    </div>
     {% else %}
     <h1>로그인이 필요합니다!!</h1>
     {% endif %}
-
-
-
+</div>
 {% endblock %}
