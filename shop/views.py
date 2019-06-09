@@ -74,6 +74,7 @@ def product_write(request):
 def product_update(request,id):
     # update_product= get_object_or_404(Product, id=id)
     update_product = Product.objects.get(id=id)
+    category = Category.objects.all()
     if request.method == "POST":
         # update_product.category=Category.objects.all()[]
         update_product.name = request.POST['name']
@@ -84,7 +85,9 @@ def product_update(request,id):
         update_product.stock = request.POST['stock']
         update_product.save()
         return HttpResponseRedirect('/')
-    return render(request, 'shop/update.html' ,{ 'update_product': update_product })
+    return render(request, 'shop/update.html' ,{ 
+        'update_product': update_product,
+        'category': category})
         
 def write_sub(request):
     if request.method == "POST":
