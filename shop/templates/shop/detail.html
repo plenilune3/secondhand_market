@@ -1,16 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}Product Detail{% endblock %}
 {% block content %}
-
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <img src="{{product.image.url}}" width="100%">
                 </div>
                 <div class="col-lg-3">
-                    <h1 class="display-6">{{product.name}}</h1>
-
+                    <div class="row">
+                    <h1 class="display-6" style="width:fit-content;">{{product.name}}</h1>
+                    {% if product.product_state == 0 %}
+                    <div class="badge badge-primary" style="height:20px; margin: auto 0px;">판매중</div>
+                    <form action="deploy_contract">
+                        <input type="hidden" name="buyer" value="{{ user.username }}">
+                        <input type="hidden" name="seller" value="{{ product.user_id }}">
+                    </form>
+                    <button onclick="location.href=''" type="button" class="btn btn-light">구매하기</a>
+                {% elif product.product_state == 1%}    
+                    <div class="badge badge-warning" style="height:20px; margin: auto 0px;">거래중</div>
+                    {% if product.buyer == user.username %}
+                    <a href="buy_contract" type="button" class="badge badge-info"
+                     style="height:20px; margin: auto 0px;">거래확정</a>
+                    {% endif %}
+                {% elif product.product_state == 2 %}
+                    <div class="badge badge-success" style="height:20px; margin: auto 0px;">거래완료</div>
+                {% endif %}
+                </div>
                     <p><span class="badge badge-secondary">Price</span> {{product.price}}</p>
 {#                    <form action="" method="post">#}
                     <form action="{% url 'cart:product_add' product.id %}" method="post">
@@ -23,31 +38,19 @@
                     <h5><span class="badge badge-light">Description</span><hr size="5px" width="100px" align="left" color="black">{{product.description|linebreaks}}</h5>
                 </div>
                 {% if user.username == product.user_id %}
-                <form action="{{product.get_absolute_url}}" method="post">
-                    {% csrf_token %}
-                    <button value="del" name="is_del"> 게시글 삭제</button>
-                    {% if product.product_state == 1%}
-                        <a href="" type="button"> 거래취소 </a>
-                    {% endif %}
-                </form>
-                <a href="update" type="button">안녕</a>
-                {% elif user.is_authenticated %}
-                    {% if product.product_state == 0 %}
-                        <div>판매중</div>
-                        <form action="deploy_contract">
-                            <input type="hidden" name="buyer" value="{{ user.username }}">
-                            <input type="hidden" name="seller" value="{{ product.user_id }}">
-                        </form>
-                        <!-- <a href="" type="button">구매하기</a> -->
-                    {% elif product.product_state == 1%}    
-                        <div>거래중</div>
-                        {% if product.buyer == user.username %}
-                        <a href="buy_contract" type="button">거래확정</a>
+                    <form action="{{product.get_absolute_url}}" method="post">
+                        {% csrf_token %}
+                        <button value="del" name="is_del"> 게시글 삭제</button>
+                        {% if product.product_state == 1%}
+                            <a href="" type="button"> 거래취소 </a>
                         {% endif %}
-                    {% elif product.product_state == 2 %}
-                        <div>거래완료</div>
-                    {% endif %}
+                    </form>
+                    <a href="update" type="button">안녕</a>
+                    
+                    <div>   
+                
                 {% endif %}
+                </div>
             </div>
 
         </div>
