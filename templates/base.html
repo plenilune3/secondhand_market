@@ -33,11 +33,13 @@
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav justify-content-end">
+      <li class="nav-item">
+          <a class="nav-link btn"> 잔액 : 200000 </a>
+      </li>
         <li class="nav-item">
             {% if user.is_authenticated %}
             <a class="nav-link btn" href="{% url 'account_logout' %}">Logout</a>
             {# 이거 if문써가지고 null 하고 !null 한다음 계좌부르는거 해야딤 #}
-            <a> 계좌잔액 : 200000 </a>
             {% else %}
             <a class="nav-link btn" href="{% url 'account_login' %}">Login</a>
             {% endif %}
