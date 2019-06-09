@@ -5,6 +5,11 @@
     {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data" action="/write_sub">
     {% csrf_token %}
+        <select name="category" id="">
+            {% for i in category %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
         <input type="text" name="name" ><br>
         <input type="text" name="price"><br>
         <input type="file" name="image"><br>
