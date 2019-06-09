@@ -5,6 +5,17 @@
     {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data" action="/write_sub">
     {% csrf_token %}
+    <div style="width: 20%; height: 200px; float: left; text-align: center" >
+        <ul>
+            <li>카테고리 : <br><br></li>
+            <li>제품명 : <br><br></li>
+            <li>제시가격 : <br><br></li>
+            <li>제품사진 : <br><br></li>
+            <li> 수량 : <br><br></li>
+            <li> 설명1  : <br><br></li>
+            <li> 설명2  : <br><br></li>  
+        </ul>
+    </div>
         <select name="category" id="">
             {% for i in category %}
             <option value="{{ i }}">{{ i }}</option>
