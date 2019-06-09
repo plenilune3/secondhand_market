@@ -39,7 +39,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     user_id = models.CharField(max_length=200, default='')
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=65, decimal_places=2)
     stock = models.PositiveIntegerField()
     available_display = models.BooleanField('Display', default=True)
     available_order = models.BooleanField('Order', default=True)

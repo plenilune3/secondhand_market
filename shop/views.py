@@ -18,10 +18,10 @@ def product_in_category(request, category_slug=None):
     if request.user.is_authenticated:
         wallet = Wallet.objects.filter(user_id=request.user.username).count()
 
-        wall = Wallet.objects.get(user_id=request.user.username)
+
         wm = WalletManagement()
-        print(wall.wallet_adress)
         if wallet !=0:
+            wall = Wallet.objects.get(user_id=request.user.username)
             wallet_i = wm.getBalance(wall.wallet_adress)
     cart = Cart(request)
     current_category = None
@@ -108,10 +108,9 @@ def product_detail(request, id, product_slug=None):
     if request.user.is_authenticated:
         wallet = Wallet.objects.filter(user_id=request.user.username).count()
 
-        wall = Wallet.objects.get(user_id=request.user.username)
         wm = WalletManagement()
-        print(wall.wallet_adress)
         if wallet !=0:
+            wall = Wallet.objects.get(user_id=request.user.username)
             wallet_i = wm.getBalance(wall.wallet_adress)
     cart = Cart(request)
     product = get_object_or_404(Product, id=id, slug=product_slug)
@@ -135,10 +134,9 @@ def product_update(request,id):
     if request.user.is_authenticated:
         wallet = Wallet.objects.filter(user_id=request.user.username).count()
 
-        wall = Wallet.objects.get(user_id=request.user.username)
         wm = WalletManagement()
-        print(wall.wallet_adress)
         if wallet !=0:
+            wall = Wallet.objects.get(user_id=request.user.username)
             wallet_i = wm.getBalance(wall.wallet_adress)
         print(wall.wallet_adress)
     # wallet_i = 0
