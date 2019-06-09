@@ -10,7 +10,7 @@ from web3.contract import ConciseContract
 class ContractDeployment:
     def __init__(self, buyer, seller, password, value):
         #아이피 주소 바꾸세용 제껄로~~~
-        self.w3 = Web3(Web3.WebsocketProvider('ws://127.0.0.1:8546'))
+        self.w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))
         self.buyer = buyer
         self.seller = seller
         self.password = password
@@ -85,7 +85,15 @@ class ContractDeployment:
                                                 'value': self.w3.toWei(self.value, "ether")})
         tx_receipt2 = self.w3.eth.waitForTransactionReceipt(tx_hash2)
 
-    def buy(self):
+        return tx_receipt.contractAddress
+
+    def buy(self, contractAddress):
+
+        self.secondhand = self.w3.eth.contract(
+            address=contractAddress,
+            abi=self.contractAbi,
+        )
+
         print("Before Buying contract's Balance : {}".format(
             self.secondhand.functions.getBalance().call()
             ))
@@ -105,4 +113,5 @@ class ContractDeployment:
 #test = ContractDeployment("0xCfd8cbE5Da3002B52c650cE1302E10c6d1BE644E","0x5B44b4E4052672b19CADEfC892b09488aEbBDDa6","pass0",100)
 #test.unlockAccount()
 #test.deploy()
+#test.buy("컨트랙트 주소")
 
