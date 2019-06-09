@@ -39,7 +39,8 @@ class Product(models.Model):
     user_id = models.CharField(max_length=200, default='')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
-
+    buyer = models.CharField(max_length=200, default='')
+    contract_address = models.CharField(max_length=200, default='')
     available_display = models.BooleanField('Display', default=True)
     available_order = models.BooleanField('Order', default=True)
     product_state = models.IntegerField(default=0)

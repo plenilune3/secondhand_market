@@ -22,7 +22,7 @@
                     <!-- <h5><span class="badge badge-secondary">Description</span>{{product.description|linebreaks}}</h5> -->
                     <h5><span class="badge badge-light">Description</span><hr size="5px" width="100px" align="left" color="black">{{product.description|linebreaks}}</h5>
                 </div>
-                {% if user.username == user_id %}
+                {% if user.username == product.user_id %}
                 <form action="{{product.get_absolute_url}}" method="post">
                     {% csrf_token %}
                     <button value="del" name="is_del"> 게시글 삭제</button>
@@ -35,13 +35,15 @@
                     {% if product.product_state == 0 %}
                         <div>판매중</div>
                         <form action="deploy_contract">
-                            <input type="hidden" value="{{ user.username }}">
-                            <input type="hidden" value="{{ user_id }}">
+                            <input type="hidden" name="buyer" value="{{ user.username }}">
+                            <input type="hidden" name="seller" value="{{ product.user_id }}">
                         </form>
                         <!-- <a href="" type="button">구매하기</a> -->
                     {% elif product.product_state == 1%}    
                         <div>거래중</div>
+                        {% if product.buyer == user.username %}
                         <a href="buy_contract" type="button">거래확정</a>
+                        {% endif %}
                     {% elif product.product_state == 2 %}
                         <div>거래완료</div>
                     {% endif %}

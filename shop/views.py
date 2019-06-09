@@ -24,33 +24,27 @@ def product_in_category(request, category_slug=None):
                                               'current_category': current_category,
                                               'categories': categories,
                                               'products': products})
-def deploy_contract(request,id):
-    update_product = Product.objects.get(id=id)
+def deploy_contract(request):
+    update_product = Product.objects.get(id=requset.POST["id"])
     update_product.product_state=1
+    판매자지갑주소 = update_product.seller_address
+    구매자지갑주소 = Wallet.objects.get(request.POST["user_id"]).address
     update_product.save()
-    #이거 뭐하는건지 물어봐야댐
+    #계약생성 (구매자 지갑주소, 판매자 지갑주소)
     test = ContractDeployment(
-        "0xCfd8cbE5Da3002B52c650cE1302E10c6d1BE644E",
-        "0x5B44b4E4052672b19CADEfC892b09488aEbBDDa6",
-        "pass0",100)
+        판매자지갑주소,
+        구매자지갑주소,
+        비밀번호,update_product.price)
     test.deploy()
 
 def buy_contract(request,id):
     update_product = Product.objects.get(id=id)
+    address = update_product.contract_adrress
+    test.buy()
     update_product.product_state=2
     update_product.save()
-    #매번하는수밖에없는지?
-    test = ContractDeployment(
-        "0xCfd8cbE5Da3002B52c650cE1302E10c6d1BE644E",
-        "0x5B44b4E4052672b19CADEfC892b09488aEbBDDa6",
-        "pass0",100)
-    test.buy()
 
 def product_detail(request, id, product_slug=None):
-    test = ContractDeployment(
-        "0xCfd8cbE5Da3002B52c650cE1302E10c6d1BE644E",
-        "0x5B44b4E4052672b19CADEfC892b09488aEbBDDa6",
-        "pass0",100)
     # print(test.unlockAccount())
     # test.deploy()
     del_product = Product.objects.get(id=id)
@@ -60,11 +54,9 @@ def product_detail(request, id, product_slug=None):
     cart = Cart(request)
     product = get_object_or_404(Product, id=id, slug=product_slug)
     add_to_cart = AddProductForm(initial={'quantity': 1})
-    id = Product.objects.get(id=id)
     return render(request, 'shop/detail.html', {'cart':cart,
                                                 'product': product,
                                                 'id' : id,
-                                                'user_id':id.user_id,
                                                 'add_to_cart': add_to_cart})
 def product_write(request):
     category = Category.objects.all()
