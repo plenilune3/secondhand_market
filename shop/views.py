@@ -51,14 +51,12 @@ def deploy_contract(request):
     print("판매자지갑주소:",판매자지갑주소)
 
     print("구매자:", 구매자지갑주소)
+    price = update_product.price
     # 계약생성 (구매자 지갑주소, 판매자 지갑주소)
-    contract = ContractDeployment(
-        구매자지갑주소,
-        판매자지갑주소,
-        비밀번호,100)
+    contract = ContractDeployment()
 
-    contract.unlockAccount()
-    update_product.contract_adress=contract.deploy()
+    contract.unlockAccount(구매자지갑주소,비밀번호)
+    update_product.contract_adress=contract.deploy(구매자지갑주소,판매자지갑주소,price)
     update_product.product_state=1
     update_product.buyer = request.user.username
 
@@ -75,6 +73,19 @@ def make_wallet(request):
     new_wallet.save()
     return HttpResponseRedirect('/')
 
+def cancel_contract(request):
+    p_id = request.POST["id"]
+    s_id = request.POST["sell"]
+    update_product = Product.objects.get(user_id=s_id, id = p_id)
+    address = update_product.contract_adress
+    판매자지갑주소 = Wallet.objects.get(user_id=s_id).wallet_adress
+    비밀번호 = request.POST["pw"]
+    contract = ContractDeployment()
+    contract.unlockAccount(판매자지갑주소,비밀번호)
+    contract.refund(address,판매자지갑주소)
+    update_product.product_state=2
+    update_product.save()
+    return HttpResponseRedirect('/')
 def buy_contract(request):
     p_id = request.POST["id"]
     s_id = request.POST["sell"]
@@ -82,16 +93,14 @@ def buy_contract(request):
     address = update_product.contract_adress
     판매자지갑주소 = Wallet.objects.get(user_id=s_id).wallet_adress
     구매자지갑주소 = Wallet.objects.get(user_id=request.user.username).wallet_adress
+    price = update_product.price/100
     비밀번호 = request.POST["pw"]
     print("판매자지갑주소:", 판매자지갑주소)
     print("구매자:", 구매자지갑주소)
     # 계약생성 (구매자 지갑주소, 판매자 지갑주소)
-    contract = ContractDeployment(
-        구매자지갑주소,
-        판매자지갑주소,
-        비밀번호, 100)
-    contract.unlockAccount()
-    contract.buy(address)
+    contract = ContractDeployment()
+    contract.unlockAccount(구매자지갑주소,비밀번호)
+    contract.buy(address,구매자지갑주소)
     update_product.product_state=2
     update_product.save()
     return HttpResponseRedirect('/')
@@ -178,7 +187,7 @@ def write_sub(request):
 
         return HttpResponseRedirect('/')
 
-        
+
 #from Contract_Deployment import ContractDeployment
 #test = ContractDeployment("0xCfd8cbE5Da3002B52c650cE1302E10c6d1BE644E","0x5B44b4E4052672b19CADEfC892b09488aEbBDDa6","pass0",100)
 #test.unlockAccount()

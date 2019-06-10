@@ -5,7 +5,7 @@ from shop.views import *
 app_name = 'shop'
 
 urlpatterns = [
-
+    path('cancel_contract',cancel_contract),
     path('buy_contract', buy_contract),
     path('deploy_contract', deploy_contract),
     path('make_wallet',make_wallet),

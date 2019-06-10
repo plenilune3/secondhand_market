@@ -1,44 +1,42 @@
 {% extends 'base.html' %}
 {% block title %}Product Detail{% endblock %}
 {% block content %}
-        <div class="container">
+
+
+
+    <div class="container">
             <div class="row">
-                <div class="col-mb" style="padding-bottom:20px; padding-right:10px; margin: auto;">
+
+                <div class="col-lg-5 col-xs">
                     <img src="{{product.image.url}}" width="100%">
                 </div>
-                <div class="col" style="width:100%;">
-                    <div class="row">
-                    <h1 class="display-6" style="width:fit-content;">{{product.name}}</h1>
-                    {% if product.product_state == 0 %}
-                    <div class="badge badge-primary" style="height:20px; margin: auto 0px;">판매중</div>
-                    <form method="post" action="/deploy_contract">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{ product.id }}">
-                        <input type="hidden" name="sell" value="{{ product.user_id }}">
-                        <input type="text" name="pw" style=" height: 20px;" placeholder="지갑비밀번호">
-                        <button class="badge badge-info" style="height:20px; margin: auto 0px;">구매하기</button>
-                    </form>
-                    <!-- <button onclick="location.href=''" type="button" class="btn btn-">구매하기</a> -->
-                {% elif product.product_state == 1%}    
-                    <div class="badge badge-warning" style="height:20px; margin: auto 0px;">거래중</div>
-                    <form method="post" action="/buy_contract">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{ product.id }}">
-                        <input type="hidden" name="sell" value="{{ product.user_id }}">
-                        <input type="text" name="pw" style=" height: 20px;" placeholder="지갑비밀번호">
-                        <button class="badge badge-info" style="height:20px; margin: auto 0px;">거래확정</button>
-                    </form>
-                {% elif product.product_state == 2 %}
-                    <div class="badge badge-success" style="height:20px; margin: auto 0px;">거래완료</div>
-                {% endif %}
-                <hr style="border-color: gray; width: 100%; margin-top: 0rem;">
-                </div>
+                <div class="col">
+                    <div class="col">
+                        <div class="col">
+                            <div class="row">
+                                <h1 class="display-6" style="width:fit-content;">{{product.name}}</h1>
+                                {% if product.product_state == 0 %}
+                                    <div class="row badge badge-primary" style="height:20px; margin: auto 0px;">판매중</div>
+                                    </div>
+                                    <!-- <button onclick="location.href=''" type="button" class="btn btn-">구매하기</a> -->
+                                {% elif product.product_state == 1%}
+                                    <div class="row badge badge-warning" style="height:20px; margin: auto 0px;">거래중</div>
+                                    </div>
+                                {% elif product.product_state == 2 %}
+                                    <div class="badge badge-success" style="height:20px; margin: auto 0px;">거래완료</div>
+                                {% endif %}
+                    </div>
                     <p><span class="badge badge-secondary">Price</span> {{product.price}}</p>
-{#                    <form action="" method="post">#}
                     <form action="{% url 'cart:product_add' product.id %}" method="post">
-                        {{add_to_cart}}
+                        <!-- {{add_to_cart}} -->
                         {% csrf_token %}
-                        <input type="submit" class="btn btn-primary btn-sm" value="Add to Cart" style="margin : 3px;">
+                        <input type="submit" class="btn btn-primary btn-sm" value="장바구니" style="margin : 3px;">
+                        {% if product.product_state == 0 %}
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#contract" style="margin: 3px">구매하기</button>
+                        {% elif product.product_state == 1%}
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#contract" style="margin: 3px">구매확정</button>
+                        {% else %}
+                        {% endif %}
                     </form>
                     <br>
                     <!-- <h5><span class="badge badge-secondary">Description</span>{{product.description|linebreaks}}</h5> -->
@@ -46,45 +44,125 @@
                         <hr size="5px" width="60%" align="left" color="#555555"  style="margin-top: 0rem;">
                         {{product.description|linebreaks}}</h5>
                 </div>
-                <!-- <div class="row" style="position:relative;">
-                {% if user.username == product.user_id %}
-                
-                <div class="row">
-                    <form action="{{product.get_absolute_url}}" method="post">
-                        {% csrf_token %}
-                        <button value="del" name="is_del" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 삭제</button>
-                        {% if product.product_state == 1%}
-                            <a href="" type="button"> 거래취소 </a>
-                        {% endif %}
-                    </form>
-                    <button onclick="location.href='update'" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 수정 </a>
-                    </div>    
-                </div>   
-
-                {% endif %}
-                </div>
-            </div> -->
 
             </div>
-            <div class="row" style="position:relative;">
-                    {% if user.username == product.user_id %}
-                    
-                    <div class="row" style="margin: auto;">
-                        <form action="{{product.get_absolute_url}}" method="post">
-                            {% csrf_token %}
-                            <button value="del" name="is_del" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 삭제</button>
-                            {% if product.product_state == 1%}
-                                <a href="" type="button"> 거래취소 </a>
-                            {% endif %}
-                        </form>
-                        <button onclick="location.href='update'" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 수정 </button>
-                        </div>    
-            </div>   
 
-                {% endif %}
+
         </div>
+    <div class="container">
+
+    <div class="row" style="position:relative;">
+        {% if user.username == product.user_id %}
+
+            <div class="row" style="margin: auto;">
+                <form action="{{product.get_absolute_url}}" method="post">
+                    {% csrf_token %}
+                    <button value="del" name="is_del" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 삭제</button>
+                </form>
+                <button onclick="location.href='update'" class="btn btn-primary btn-sm" style="margin-top: 10px; margin-right:10px;"> 게시글 수정 </button>
+            {% if product.product_state == 1%}
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#savePostsModal" style="margin-top: 10px; margin-right:10px;">판매취소</button>
+                    {% endif %}
             </div>
+        {% endif %}
+    </div>
+    </div>
 
 
 
-{% endblock %}
+<div class="modal fade" id="contract" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="savePostsLabel">
+
+                {% if product.product_state == 0 %}
+                        구매
+                {% elif product.product_state == 1 %}
+                        구매확정
+                {% endif %}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div style="margin-left: 1rem">
+
+                    <table class="table" >
+                        <tr>
+                            <td>구매자</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>판매자</td>
+                            <td>{{ product.user_id }}</td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td>{{ product.price }}</td>
+                        </tr>
+                        <tr>
+                            <td>게시글</td>
+                            <td>{{ product.name }}</td>
+                        </tr>
+                    </table>
+                </div>
+                {% if product.product_state == 0 %}
+                    <form method="post" action="/deploy_contract">
+                {% elif product.product_state == 1%}
+                    <form method="post" action="/buy_contract">
+                {% endif %}
+                                    <div class="modal-body">
+
+                                    <div class="form-group">
+                                {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ product.id }}">
+                                    <input type="hidden" name="sell" value="{{ product.user_id }}">
+                                    <label for="title">비밀번호입력</label>
+                                    <input type="text" name="pw" id="title" class="form-control" placeholder="지갑비밀번호">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button  class="btn btn-primary" id="btn-save">확인</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="/cancel_contract" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="savePostsLabel">판매취소</h5>
+                </div>
+                <div class="modal-body">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            <label for="title">비밀번호입력</label>
+                            <input type="hidden" name="id" value="{{ product.id }}">
+                            <input type="hidden" name="sell" value="{{ product.user_id }}">
+                            <input type="text" name="pw" id="title" class="form-control" placeholder="지갑비밀번호">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
+                    <button class="btn btn-primary" id="btn-save">취소확인</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+    {% endblock %}

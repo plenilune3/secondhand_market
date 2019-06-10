@@ -6,7 +6,7 @@ from web3 import Web3
 class WalletManagement:
 
     def __init__(self):
-        self.w3 = Web3(Web3.HTTPProvider('http://172.19.7.43:8545'))
+        self.w3 = Web3(Web3.HTTPProvider('http://172.19.3.135:8545'))
 
     def createAccount(self, secret_key):
         new_account = self.w3.personal.newAccount(secret_key)

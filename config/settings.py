@@ -90,18 +90,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'secondhand_market',
-        'USER': 'plenilune',
-        'PASSWORD': '04280428',
-        'HOST': 'secondhand-market.c46fdllcmny2.ap-northeast-2.rds.amazonaws.com',
+        'NAME': 'onlineshop',
+        'USER': 'cwb2310',
+        'PASSWORD': 'dnjs2310',
+        'HOST': 'onlineshop.cgtzccqybwuz.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
 
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
+AWS_ACCESS_KEY_ID = 'AKIAUT6DDL4K7ER7MBV6'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_REGION = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'django-secondhand'
+AWS_STORAGE_BUCKET_NAME = 'cwb-django-onlineshop'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',

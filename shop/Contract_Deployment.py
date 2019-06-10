@@ -1,5 +1,3 @@
-#pip install web3
-
 import json
 import web3
 
@@ -10,7 +8,7 @@ from web3.contract import ConciseContract
 class ContractDeployment:
     def __init__(self):
         #아이피 주소 바꾸세용 제껄로~~~
-        self.w3 = Web3(Web3.HTTPProvider('http://localhost:8545'))
+        self.w3 = Web3(Web3.HTTPProvider('http://172.19.3.135:8545'))
         self.secondhand = None
         self.contractAbi = [{'constant': True,
                              'inputs': [],
@@ -109,4 +107,3 @@ class ContractDeployment:
 #test.deploy('구매자주소', '판매자주소', '가격')
 #test.buy('컨트랙트 주소', '구매자주소')
 #test.refund('컨트랙트 주소', '판매자주소')
-

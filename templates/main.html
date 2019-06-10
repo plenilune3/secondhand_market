@@ -1,52 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>블록체인 전자투표</title>
-    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
-</head>
-<body>
-    <h1>블록체인을 활용한 전자투표 게시판</h1>
-    <div class="col-md-12">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록</button>
-    </div>
 
-    <div class="modal fade" id="savePostsModal" tabindex="-1" role="dialog" aria-labelledby="savePostsLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="savePostsLabel">게시글 등록</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="title">제목</label>
-                            <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="author"> 작성자 </label>
-                            <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
-                        </div>
-                        <div class="form-group">
-                            <label for="content"> 내용 </label>
-                            <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" id="btn-save">등록</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!--부트스트랩 js, jquery 추가-->
-    <script src="/js/lib/jquery.min.js"></script>
-    <script src="/js/lib/bootstrap.min.js"></script>
-</div>
-</body>
-</html>
+
+                            <div class="row">
+                                <form method="post" action="/deploy_contract">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{ product.id }}">
+                                    <input type="hidden" name="sell" value="{{ product.user_id }}">
+                                    <input type="text" name="pw" style=" height: 1.6rem;" placeholder="지갑비밀번호">
+                                    <button class="badge badge-info" style="height:2rem; margin: auto 0px;">구매하기</button>
+                                </form>
+                            </div>
+
+                            <div class="row">
+
+                            <form method="post" action="/buy_contract">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ product.id }}">
+                                <input type="hidden" name="sell" value="{{ product.user_id }}">
+                                <input type="text" name="pw" style=" height: 20px;" placeholder="지갑비밀번호">
+                                <button class="badge badge-info" style="height:20px; margin: auto 0px;">거래확정</button>
+                            </form>
+                        </div>
+                            <form method="post" action="/buy_contract">
+                                <form method="post" action="/deploy_contract">
