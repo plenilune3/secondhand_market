@@ -33,6 +33,13 @@
                     <!-- <p class="card-text">{{product.description}} <span class="badge badge-primary">${{product.price}}</span></p> -->
                     <p class="card-text">{{product.description}}</p>
                     <p><span class="badge badge-success" style="border : 1px solid;">Price</span>&nbsp;{{product.price}}</p>
+                    {% if product.product_state == 0 %}
+                    <p><span class="badge badge-primary" style="border : 1px solid;">판매중</span></p>
+                    {% elif product.product_state == 1%}
+                    <p><span class="badge badge-warning" style="border : 1px solid;">거래중</span></p>
+                    {% elif product.product_state == 2 %}
+                    <p><span class="badge badge-success" style="border : 1px solid;">판매완료</span></p>
+                    {% endif %}
                     <!-- <p><span class="badge badge-primary">${{product.price}}</span></p> -->
                     <a href="{{product.get_absolute_url}}" class="btn btn-primary">게시글 보기</a>
                   </div>
